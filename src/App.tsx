@@ -9,7 +9,7 @@ function App() {
       <nav>
         <Link to="/">Home</Link> | <Link to="/create">Create</Link>
       </nav>
-      <Routes>
+            <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />
         <Route path="*" element={<NotFound />} />
@@ -18,4 +18,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
