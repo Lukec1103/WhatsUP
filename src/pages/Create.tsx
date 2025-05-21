@@ -21,21 +21,17 @@ export default function Create() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // Create the blog post object
     const blogPost: BlogPost = {
       id: Date.now(),
       title,
       description,
       backgroundColor: selectedColor,
       image,
-      date: new Date().toLocaleDateString()
+      date: new Date().toLocaleDateString('en-GB') // DD/MM/YYYY format
     };
     
-    // Save to localStorage
     const existingPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
     localStorage.setItem('blogPosts', JSON.stringify([...existingPosts, blogPost]));
-    
-    // Navigate back to home
     navigate('/');
   };
 
@@ -51,7 +47,6 @@ export default function Create() {
   };
 
   const handleColorChange = () => {
-    // Cycle through a few predefined colors
     const colors = ['#e0e0e0', '#f8d7da', '#fff3cd', '#d1e7dd', '#cfe2ff'];
     const currentIndex = colors.indexOf(selectedColor);
     const nextIndex = (currentIndex + 1) % colors.length;
@@ -74,17 +69,17 @@ export default function Create() {
                   type="text" 
                   className="text-input" 
                   value={title}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+                  onChange={(e) => setTitle(e.target.value)}
                   required
                 />
               </div>
               
               <div className="input-group">
-                <label className="input-label">add discription</label>
+                <label className="input-label">add description</label>
                 <textarea 
                   className="textarea-input" 
                   value={description}
-                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
+                  onChange={(e) => setDescription(e.target.value)}
                   required
                 />
               </div>
@@ -101,7 +96,7 @@ export default function Create() {
                 />
                 <label htmlFor="image-upload" className="image-upload">
                   {image ? (
-                    <img src={image} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px' }} />
+                    <img src={image} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   ) : (
                     <>
                       <div className="plus-icon">+</div>

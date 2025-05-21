@@ -4,6 +4,8 @@ interface BlogPost {
   id: number;
   title: string;
   date: string;
+  image: string | null;
+  backgroundColor: string;
 }
 
 export default function Home() {
@@ -13,7 +15,7 @@ export default function Home() {
     <div className="blog-container">
       <h2 className="section-title">BLOGS</h2>
       {posts.length === 0 ? (
-        <p>No posts yet. Create one!</p>
+        <p className="no-posts">No posts yet. Create one!</p>
       ) : (
         <div className="posts-list">
           {posts.map((post) => (
@@ -22,9 +24,23 @@ export default function Home() {
               to={`/post/${post.id}`} 
               className="post-link"
             >
-              <div className="post-preview">
-                <h3>{post.title}</h3>
-                <span className="post-date">{post.date}</span>
+              <div 
+                className="post-preview" 
+                style={{ backgroundColor: post.backgroundColor }}
+              >
+                {post.image && (
+                  <div className="thumbnail-container">
+                    <img 
+                      src={post.image} 
+                      alt="Post thumbnail" 
+                      className="post-thumbnail"
+                    />
+                  </div>
+                )}
+                <div className="post-text">
+                  <h3>{post.title}</h3>
+                  <span className="post-date">{post.date}</span>
+                </div>
               </div>
             </Link>
           ))}
