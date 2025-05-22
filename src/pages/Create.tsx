@@ -41,8 +41,11 @@ export default function Create() {
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const imageUrl = URL.createObjectURL(e.target.files[0]);
-      setImage(imageUrl);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result as string);
+      };
+      reader.readAsDataURL(e.target.files[0]); // Converts image to base64
     }
   };
 
